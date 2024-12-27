@@ -1,5 +1,6 @@
 import { Prompt } from "next/font/google";
 import { Aside } from "@/components/Aside";
+import { SearchForm } from '@/components/SearchForm'
 import "./globals.css";
 
 export const metadata = {
@@ -8,7 +9,7 @@ export const metadata = {
 };
 
 const prompt = Prompt({
-  weight: ["400", "600"],
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
   display: "swap",
 })
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <div className="app-container">
           <Aside />
           <div className="main-content">
+            <SearchForm />
             {children}
           </div>         
         </div>
