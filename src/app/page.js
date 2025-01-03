@@ -28,8 +28,8 @@ const getAllPosts = async (page, searchTerm) => {
       where,
       take: perPage,
       skip,
-      orderBy: { createdAt: "desc" },
-      include: { author: true },
+      orderBy: { id: "desc" },
+      include: { author: true, comments: true },
     });
 
     return { data: posts, prev, next };

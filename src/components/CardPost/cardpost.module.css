@@ -42,9 +42,18 @@
 
 .footer {
     padding: 16px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.link {
-    text-decoration: none;
-    cursor: pointer;
+.footer p {
+    margin: 0;
+    color: #888;
+    font-size: 15px;
+    text-align: center;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
 }

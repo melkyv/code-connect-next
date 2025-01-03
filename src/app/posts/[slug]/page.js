@@ -5,12 +5,28 @@ import html from "remark-html";
 import styles from "./page.module.css"
 import db from "../../../../prisma/db";
 import { redirect } from "next/navigation";
+import { CommentList } from "@/components/CommentList";
 
 const getPostBySlug = async (slug) => {
     try {
         const post = await db.post.findFirst({
             where: { slug },
-            include: { author: true },
+            include: {
+                author: true, 
+                comments: {
+                    include: {
+                        author: true,
+                        children: {
+                            include: {
+                                author: true
+                            }
+                        }
+                    },
+                    where: {
+                        parentId: null
+                    }
+                } 
+            },
         });
 
         if (!post) {
@@ -42,6 +58,9 @@ export const PagePost = async ({ params }) => {
         <h3 className={styles.subtitle}>Código:</h3>
         <div className={styles.code}>
             <div dangerouslySetInnerHTML={{ __html: post.markdown }} />
+        </div>
+        <div>
+            <CommentList comments={post.comments} />
         </div>
     </div>
   )
